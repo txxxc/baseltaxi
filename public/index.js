@@ -19,7 +19,7 @@ async function initMap() {
   const image =
     "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
   map = new Map(document.getElementById("map"), {
-    zoom: 14,
+    zoom: 16,
     center: position,
     mapId: "DEMO_MAP_ID",
   });
@@ -46,7 +46,7 @@ async function fetchTJ() {
       return;
     })
     .then(async function (res) {
-      await sleep(3000);
+      await sleep(1000);
       if (res) {
         if (Object.keys(res).length > 0) {
           const pos = res.current.geometry.coordinates;
