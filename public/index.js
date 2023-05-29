@@ -19,9 +19,10 @@ async function initMap() {
   const image =
     "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
   map = new Map(document.getElementById("map"), {
-    zoom: 16,
+    zoom: 18,
     center: position,
     mapId: "DEMO_MAP_ID",
+    mapTypeId: 'satellite'
   });
   marker = new google.maps.Marker({
     map: map,
@@ -46,7 +47,7 @@ async function fetchTJ() {
       return;
     })
     .then(async function (res) {
-      await sleep(1000);
+      await sleep(500);
       if (res) {
         if (Object.keys(res).length > 0) {
           console.log(res);
