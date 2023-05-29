@@ -49,6 +49,7 @@ async function fetchTJ() {
       await sleep(1000);
       if (res) {
         if (Object.keys(res).length > 0) {
+          console.log(res);
           const pos = res.current.geometry.coordinates;
 
           console.log(pos);
