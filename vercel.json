@@ -1,6 +1,15 @@
 {
-    "rewrites": [{
-        "source": "/hook/(.*)",
-        "destination": "/hook"
-    }]
-}
+    "version": 2,
+    "builds": [
+      {
+        "src": "tj.js",
+        "use": "@now/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "tj.js"
+      }
+    ]
+  }
