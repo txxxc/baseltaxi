@@ -2,7 +2,7 @@
   "name": "baseltaxi",
   "version": "1.0.0",
   "description": "--",
-  "main": "index.html",
+  "main": "tj.js",
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -12,7 +12,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node tj.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node tj.js"
   },
   "repository": {
