@@ -50,12 +50,12 @@ async function fetchTJ() {
       if (res) {
         if (Object.keys(res).length > 0) {
           console.log(res);
+          let pos = null;
           if(res.current) {
-            const pos = res.current.geometry.coordinates;
+            pos = res.current.geometry.coordinates;
           } else {
-            const pos = res.locations[0].geometry.coordinates;
+            pos = res.locations[0].geometry.coordinates;
           }
-
           console.log(pos);
           var latlng = new google.maps.LatLng(pos[1], pos[0]);
           marker.setPosition(latlng);
