@@ -19,8 +19,7 @@ async function initMap() {
   beachFlagImg.src =
     "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
 
-  const image =
-    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+  const image = "/taxi.png";
   map = new Map(document.getElementById("map"), {
     zoom: 17,
     mapTypeId: "hybrid",
@@ -31,7 +30,8 @@ async function initMap() {
   infoWindow = new google.maps.InfoWindow();
   marker = new google.maps.Marker({
     map: map,
-    content: beachFlagImg,
+    icon: image,
+    scaledSize: new google.maps.Size(10, 10),
     position: position,
     title: "Jorik",
   });
@@ -98,7 +98,7 @@ async function fetchTJ() {
     .then(async function (res) {
       await sleep(1000);
       if (res) {
-        console.log(res);
+        //console.log(res);
         if (Object.keys(res).length > 0) {
           if (res.lon && res.lat) {
             var latlng = new google.maps.LatLng(res.lat, res.lon);
@@ -108,7 +108,7 @@ async function fetchTJ() {
           }
         }
       }
-      console.log(`...`)
+      //console.log(`...`)
       fetchTJ();
     });
 }
