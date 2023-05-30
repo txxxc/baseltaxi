@@ -1,11 +1,13 @@
 // Initialize and add the map
 let map;
+let infoWindow;
 let marker;
 async function initMap() {
   const position = {
     lat: 38.6434757,
     lng: 0.0082797
   };
+  
   const {
     Map
   } = await google.maps.importLibrary("maps");
@@ -25,6 +27,7 @@ async function initMap() {
     mapId: "DEMO_MAP_ID",
     tilt: 0
   });
+  infoWindow = new google.maps.InfoWindow();
   marker = new google.maps.Marker({
     map: map,
     content: beachFlagImg,
@@ -33,8 +36,50 @@ async function initMap() {
   });
 }
 initMap();
-
 fetchTJ();
+const locationButton = document.querySelector(`#myLocation`);
+const driverLocationButton = document.querySelector(`#driverLocation`);
+locationButton.addEventListener("click", () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        infoWindow.setPosition(pos);
+        infoWindow.setContent("Location found.");
+        infoWindow.open(map);
+        map.setCenter(pos);
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    handleLocationError(false, infoWindow, map.getCenter());
+  }
+});
+
+let currentDriverLocation = null;
+
+driverLocationButton.addEventListener("click", () => {
+  if (currentDriverLocation != null) {
+
+    map.setCenter(currentDriverLocation);
+  }
+});
+
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation."
+  );
+  infoWindow.open(map);
+}
 
 function placeLocationOnMap() {
   //const location = checkCurrentLocation();
@@ -54,8 +99,9 @@ async function fetchTJ() {
         if (Object.keys(res).length > 0) {
           if (res.lon && res.lat) {
             var latlng = new google.maps.LatLng(res.lat, res.lon);
+            currentDriverLocation = latlng;
             marker.setPosition(latlng);
-            map.setCenter(latlng);
+            //map.setCenter(latlng);
           }
         }
       }
