@@ -37,6 +37,7 @@ app.get('/tj', (request, response) => {
 
 });
 app.get('/', (request, response) => {
+    response.set('Cache-Control', 'no-store')
     response.sendFile(path.join(__dirname, '/index.html'));
 });
 app.listen(PORT,function(){
