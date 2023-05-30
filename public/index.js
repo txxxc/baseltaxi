@@ -19,10 +19,11 @@ async function initMap() {
   const image =
     "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
   map = new Map(document.getElementById("map"), {
-    zoom: 18,
+    zoom: 17,
+    mapTypeId: "hybrid",
     center: position,
     mapId: "DEMO_MAP_ID",
-    mapTypeId: 'satellite'
+    tilt: 0
   });
   marker = new google.maps.Marker({
     map: map,
@@ -47,20 +48,15 @@ async function fetchTJ() {
       return;
     })
     .then(async function (res) {
-      await sleep(500);
+      await sleep(1000);
       if (res) {
+        console.log(res);
         if (Object.keys(res).length > 0) {
-          console.log(res);
-          let pos = null;
-          if(res.current) {
-            pos = res.current.geometry.coordinates;
-          } else {
-            pos = res.locations[0].geometry.coordinates;
+          if (res.lon && res.lat) {
+            var latlng = new google.maps.LatLng(res.lat, res.lon);
+            marker.setPosition(latlng);
+            map.setCenter(latlng);
           }
-          console.log(pos);
-          var latlng = new google.maps.LatLng(pos[1], pos[0]);
-          marker.setPosition(latlng);
-          map.setCenter(latlng);
         }
       }
       console.log(`...`)

@@ -3,7 +3,9 @@ const fs = require('fs');
 var cors = require('cors');
 var app = express();
 const path = require('path');
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const dotenv = require('dotenv');
+dotenv.config();
 var PORT = 8081;
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/public')))
@@ -15,7 +17,6 @@ function readJSON(callback) {
     });
 }
 app.locals.pretty = true;
-
 let currentLocation = {};
 
 app.post("/hook", (req, res) => {
@@ -24,7 +25,6 @@ app.post("/hook", (req, res) => {
   res.status(200).end() // Responding is important
 })
 app.get('/tj', (request, response) => {
-    currentLocation
     response.send(currentLocation);
     // readJSON((err, nameContent) => {
     //     if(err) {
