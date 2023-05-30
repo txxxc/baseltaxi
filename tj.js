@@ -18,7 +18,6 @@ function readJSON(callback) {
     });
 }
 app.locals.pretty = true;
-// console.log(`Your port is ${process.env.GOOGLEKEY}`);
 let currentLocation = {};
 
 app.post("/hook", (req, res) => {
