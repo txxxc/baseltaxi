@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 var PORT = 8081;
 app.use(cors());
+
 app.use(express.static(path.join(__dirname, '/public')))
 app.use(bodyParser.json())
 function readJSON(callback) {
@@ -17,6 +18,7 @@ function readJSON(callback) {
     });
 }
 app.locals.pretty = true;
+// console.log(`Your port is ${process.env.GOOGLEKEY}`);
 let currentLocation = {};
 
 app.post("/hook", (req, res) => {
@@ -36,6 +38,7 @@ app.get('/tj', (request, response) => {
 
 });
 app.get('/', (request, response) => {
+    res.set('Cache-Control', 'no-store');
     response.sendFile(path.join(__dirname, '/index.html'));
 });
 app.listen(PORT,function(){
