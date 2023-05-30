@@ -2,6 +2,7 @@
 let map;
 let infoWindow;
 let marker;
+let marker2;
 async function initMap() {
   const position = {
     lat: 38.6434757,
@@ -34,6 +35,10 @@ async function initMap() {
     position: position,
     title: "Jorik",
   });
+  marker2 = new google.maps.Marker({
+    map: map,
+    title: "User",
+  });
 }
 initMap();
 fetchTJ();
@@ -41,15 +46,13 @@ const locationButton = document.querySelector(`#myLocation`);
 const driverLocationButton = document.querySelector(`#driverLocation`);
 locationButton.addEventListener("click", () => {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       (position) => {
         const pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         };
-        infoWindow.setPosition(pos);
-        infoWindow.setContent("Location found.");
-        infoWindow.open(map);
+        marker2.setPosition(pos);
         map.setCenter(pos);
       },
       () => {
