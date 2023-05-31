@@ -9,11 +9,20 @@
 </head>
 
 <body>
-    <h3>BASELTAXIBETA</h3>
-    <button id="myLocation">MY LOCATION</button>
-    <button id="driverLocation">DRIVER LOCATION</button>
-    <!--The div element for the map -->
-    <div id="map"></div>
+    <div id="root">
+        <header>
+            BaselCabs.ch
+        </header>
+        <main>
+            <figure id="map"></figure>
+        </main>
+        <footer>
+            <div class="top"></div>
+            <input type="text" placeholder="Pickup address">
+            <button id="myLocation">MY LOCATION</button>
+            <button id="driverLocation">DRIVER LOCATION</button>
+        </footer>
+    </div>
 
     <!-- prettier-ignore -->
     <script>

@@ -21,11 +21,12 @@ async function initMap() {
 
   const image = "/taxi.png";
   map = new Map(document.getElementById("map"), {
-    zoom: 17,
-    mapTypeId: "hybrid",
+    zoom: 15,
+    //mapTypeId: "hybrid",
     center: position,
     mapId: "DEMO_MAP_ID",
-    tilt: 0
+    tilt: 0,
+    disableDefaultUI: true,
   });
   infoWindow = new google.maps.InfoWindow();
   marker = new google.maps.Marker({

@@ -1,15 +1,21 @@
 var express = require('express');
 const fs = require('fs');
 var cors = require('cors');
+var lessMiddleware = require('less-middleware');
 var app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
 const dotenv = require('dotenv');
 dotenv.config();
 var PORT = 8081;
+
+
+
+app.use(lessMiddleware(__dirname + '/public'));
 app.use(cors());
-app.use(express.static(path.join(__dirname, '/public')))
-app.use(bodyParser.json())
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(bodyParser.json());
+
 function readJSON(callback) {
     fs.readFile('data.json', "utf8", function(err, result) {
         if (err) callback(err);
