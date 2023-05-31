@@ -3,8 +3,10 @@
 <head>
     <title>Add Map</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>
     <link rel="stylesheet" type="text/css" href="./style.css" />
+    <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
     <script type="module" src="./index.js?123456"></script>
 </head>
 
@@ -20,7 +22,11 @@
             <div class="top"></div>
             <input type="text" placeholder="Pickup address">
             <button id="myLocation">MY LOCATION</button>
-            <button id="driverLocation">DRIVER LOCATION</button>
+            <div id="drivers">
+
+            </div>
+      
+            <div id="online">Drivers Online: <span>0</span></div> 
         </footer>
     </div>
 

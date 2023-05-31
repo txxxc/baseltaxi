@@ -25,13 +25,37 @@ function readJSON(callback) {
 app.locals.pretty = true;
 console.log(`Your port is ${process.env.GOOGLEKEY}`);
 let currentLocation = {};
-
+const driversOnline = {};
 app.post("/hook", (req, res) => {
-  console.log(req.body) // Call your action on the request here
-  currentLocation = req.body;
+  const data = req.body;
+  
+  if (!data) {
+    console.error(`No payload received`);
+    res.status(401).end()
+    return;
+  }
+  if (!data.driver) {
+    console.error(`No driver.`);
+    res.status(401).end()
+    return;
+  }
+  if (!data.lat) {
+    console.error(`No LAT.`);
+    res.status(401).end()
+    return;
+  }
+  if (!data.lon) {
+    console.error(`No LON.`);
+    res.status(401).end()
+    return;
+  }
+  driversOnline[data.driver] = {currentLocation: {lat: data.lat, lon: data.lon}};
+  
+  currentLocation = driversOnline;
   res.status(200).end() // Responding is important
 })
 app.get('/tj', (request, response) => {
+    
     response.send(currentLocation);
     // readJSON((err, nameContent) => {
     //     if(err) {
