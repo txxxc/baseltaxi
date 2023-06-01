@@ -55,7 +55,13 @@ app.post("/hook", (req, res) => {
   res.status(200).end() // Responding is important
 })
 app.get('/tj', (request, response) => {
-    
+    console.log(currentLocation);
+    currentLocation[`Grisha`] = {currentLocation: {
+        "lon": 7.572089,
+        "lat": 47.559804,
+        "driver": "Grisha"
+    }};
+    console.log(currentLocation);
     response.send(currentLocation);
     // readJSON((err, nameContent) => {
     //     if(err) {
