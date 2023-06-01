@@ -119,7 +119,7 @@ async function initMap() {
     strictBounds: true,
     //locationRestriction: circle.getBounds(),
     //types: ["street_address", "transit_station", "street_number"]
-    types: ["address"]
+    //types: ["address"]
   };
   const autocomplete = new google.maps.places.Autocomplete(input, options);
   autocomplete.addListener("place_changed", () => {
