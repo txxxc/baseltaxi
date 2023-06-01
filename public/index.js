@@ -102,17 +102,23 @@ async function initMap() {
     lat: 47.549414,
     lng: 7.588957
   };
-  var radius = 1000;
+  var radius = 10000;
   var circle = new google.maps.Circle({
     center: location,
-    radius: radius
+    radius: radius,
+    strokeColor: '#000000',
+    strokeOpacity: 0.1,
+    strokeWeight: 3,
+    fillColor: '#FF0099',
+    fillOpacity: 0.1,
+    map: map
   });
   const options = {
-    fields: ["formatted_address", "geometry"],
+    fields: ["formatted_address", "geometry", "name"],
     bounds: circle.getBounds(),
     strictBounds: true,
     //locationRestriction: circle.getBounds(),
-    types: ["address"],
+    types: ["street_address", "transit_station"]
   };
   const autocomplete = new google.maps.places.Autocomplete(input, options);
   autocomplete.addListener("place_changed", () => {
