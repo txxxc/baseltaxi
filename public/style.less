@@ -69,4 +69,31 @@ button {
     padding-top:10px;
     color:#7b640b;
 }
+#requests {
+    margin-top:10px;
+    border:1px solid #7b640b;
+    border-radius:5px;
+    padding:5px;
+    min-height:20px;
+}
 
+#rideRequests {
+    position:absolute;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index:999;
+    display:block;
+    &.hidden {
+        display:none;
+    }
+    .rideRequest {
+        margin:10px;
+        padding:10px;
+        border:1px solid #ccc;
+        box-shadow:0 1px 5px rgba(0,0,0,.1);
+        border-radius: 5px;
+        background:#fff;
+    }
+}

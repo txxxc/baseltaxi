@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"/>
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- <script type="module" src="./map.js?123456"></script> -->
     <script type="module" src="./index.js?123456"></script>
 </head>
 
 <body>
     <div id="root">
+        <div id="rideRequests"> 
+            
+        </div>
         <header>
             BaselCabs.ch
         </header>
@@ -21,13 +25,15 @@
         <footer>
             <div class="top"></div>
             <input type="text" id="pickupAddress" placeholder="Pickup address"/>
+            <button id="requestPickup">Request Pickup</button>
             <div id="journey">Time to arrive: <span id="tta">0</span>, Distance: <span id="dist">0</span></div> 
-            <button id="myLocation">MY LOCATION</button>
-            <div id="drivers">
-
-            </div>
-      
+            <button id="myLocation">My location</button>
+            <div id="drivers"></div>
             <div id="online">Drivers Online: <span>0</span></div> 
+            <div id="requests">
+                <h4>Pending rides:</h4>
+                <div></div>
+            </div>
         </footer>
     </div>
 

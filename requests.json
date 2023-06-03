@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "user_id": 123,
+        "location": {
+            "lat": 47.449414,
+            "lng": 7.388957
+        },
+        "accepted": false
+    },
+    {
+        "id": 2,
+        "user_id": 456,
+        "location": {
+            "lat": 47.449414,
+            "lng": 7.388957
+        },
+        "accepted": false
+    }
+]
