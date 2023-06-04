@@ -1,4 +1,3 @@
-// import { live, sleep } from "/helpers.js";
 let map;
 let infoWindow;
 let liveLocationMarker;
