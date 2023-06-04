@@ -1,4 +1,4 @@
-import { live, sleep } from "/helpers.js";
+// import { live, sleep } from "/helpers.js";
 let map;
 let infoWindow;
 let liveLocationMarker;
@@ -302,3 +302,22 @@ function createRideRequests(x) {
   };
   document.querySelector(`#rideRequests`).innerHTML = ridesHTML;
 };
+
+function live(eventType, elementQuerySelector, cb) {
+  document.addEventListener(eventType, function (event) {
+      var qs = document.querySelectorAll(elementQuerySelector);
+      if (qs) {
+          var el = event.target,
+              index = -1;
+          while (el && ((index = Array.prototype.indexOf.call(qs, el)) === -1)) {
+              el = el.parentElement;
+          }
+          if (index > -1) {
+              cb.call(el, event);
+          }
+      }
+  });
+};
+function sleep(ms) {
+  return new Promise(resolveFunc => setTimeout(resolveFunc, ms));
+}
