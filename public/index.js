@@ -5,6 +5,7 @@ let pickupMarker;
 let directionsDisplay;
 let pickupLocation;
 let directionsService;
+var geocoder;
 var position = {
   lat: 47.549414,
   lng: 7.588957
@@ -13,6 +14,7 @@ const config = {
   showCircle: false
 }
 async function initMap() {
+  
   const {
     Map
   } = await google.maps.importLibrary("maps");
@@ -23,6 +25,7 @@ async function initMap() {
     AutocompleteService
   } = await google.maps.importLibrary("places");
   directionsService = new google.maps.DirectionsService;
+  geocoder = new google.maps.Geocoder();
   map = new Map(document.getElementById("map"), {
     zoom: 12,
     center: position,
@@ -80,10 +83,6 @@ async function initMap() {
     pickupMarker.setPosition(place.geometry.location);
     map.setZoom(16);
     pickupLocation = place.geometry.location;
-
-
-
-
   });
   infoWindow = new google.maps.InfoWindow();
   getUserLocation();
@@ -92,7 +91,7 @@ initMap();
 fetchTJ();
 let livePos = null;
 
-function getUserLocation() {
+async function getUserLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.watchPosition(
       (position) => {
@@ -102,6 +101,8 @@ function getUserLocation() {
         };
         livePos = pos;
         liveLocationMarker.setPosition(pos);
+        return(pos);
+        
       },
       () => {
         handleLocationError(true, infoWindow, map.getCenter());
@@ -115,6 +116,8 @@ function getUserLocation() {
   }
 }
 
+
+
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(
@@ -124,9 +127,40 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   );
   infoWindow.open(map);
 }
+
+async function getCurrentLocation() {
+  if (navigator.geolocation) {
+    const promiseA = new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          resolve(pos);
+        }
+      );
+    });
+    return promiseA;
+    
+  } 
+}
 const locationButton = document.querySelector(`#myLocation`);
-locationButton.addEventListener("click", () => {
-  getUserLocation();
+locationButton.addEventListener("click", async() => {
+  const pos = await getCurrentLocation();
+  console.log(pos);
+  geocoder.geocode({
+    'latLng': pos
+  }, function (results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      if (results[0]) {
+        console.log(results[0]);
+        map.setCenter(pos);
+        pickupLocation = pos;
+        document.querySelector(`#pickupAddress`).value = results[0].formatted_address;
+      }
+    }
+  });
 });
 let driversOnline = 0;
 let markers = {};
@@ -273,7 +307,7 @@ function alertRideRequest() {
     })
     .then(async function (res) {
       await sleep(500);
-      console.log(res);
+      //console.log(res);
       createRideRequests(res);
       if (res.length > 0) {
         document.querySelector(`#rideRequests`).classList.remove(`hidden`);
@@ -304,19 +338,20 @@ function createRideRequests(x) {
 
 function live(eventType, elementQuerySelector, cb) {
   document.addEventListener(eventType, function (event) {
-      var qs = document.querySelectorAll(elementQuerySelector);
-      if (qs) {
-          var el = event.target,
-              index = -1;
-          while (el && ((index = Array.prototype.indexOf.call(qs, el)) === -1)) {
-              el = el.parentElement;
-          }
-          if (index > -1) {
-              cb.call(el, event);
-          }
+    var qs = document.querySelectorAll(elementQuerySelector);
+    if (qs) {
+      var el = event.target,
+        index = -1;
+      while (el && ((index = Array.prototype.indexOf.call(qs, el)) === -1)) {
+        el = el.parentElement;
       }
+      if (index > -1) {
+        cb.call(el, event);
+      }
+    }
   });
 };
+
 function sleep(ms) {
   return new Promise(resolveFunc => setTimeout(resolveFunc, ms));
 }

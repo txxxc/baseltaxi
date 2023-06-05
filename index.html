@@ -12,32 +12,51 @@
 </head>
 
 <body>
-    <div id="root">
-        <div id="rideRequests">
 
-        </div>
-        <header>
-            BaselCabs.ch
-        </header>
-        <main>
-            <figure id="map"></figure>
-        </main>
-        <footer>
-            <div class="top"></div>
-            <input type="text" id="pickupAddress" placeholder="Pickup address" />
-            <button id="requestPickup">Request Pickup</button>
-            <div id="journey">Time to arrive: <span id="tta">0</span>, Distance: <span id="dist">0</span></div>
-            <button id="myLocation">My location</button>
-            <div id="drivers"></div>
-            <div id="online">Drivers Online: <span>0</span></div>
-            <div id="requests">
-                <h4>Pending rides:</h4>
-                <div></div>
+    <div class="m">
+        <div class="p">
+            <div class="b" id="rider">
+                
+                <main>
+                    <header>
+                        <div id="logo">BaselCabs.ch</div>
+                        <div id="menu">=</div>
+                    </header>
+                    <figure id="map"></figure>
+                </main>
+                <footer>
+                    <div class="top"></div>
+                    <div class="input-wrap">
+                        <img src="mylocation.png" id="myLocation" />
+                        <input type="text" id="pickupAddress" placeholder="Pickup address" />
+                    </div>
+                    
+                    <button id="requestPickup">Request Pickup</button>
+                    <div id="journey">Time to arrive: <span id="tta">0</span>, Distance: <span id="dist">0</span></div>
+                
+                    <div id="drivers"></div>
+                    <div id="online">Drivers Online: <span>0</span></div>
+                    <div id="requests">
+                        <h4>Pending rides:</h4>
+                        <div></div>
+                    </div>
+                </footer>
             </div>
-        </footer>
+        </div>
+        <div class="p">
+            <div class="b">
+                <div id="rideRequests"></div>
+                <main>
+                    <h4>Hello, Grisha!</h4>
+                    
+                </main>
+            </div>
+            
+        </div>
     </div>
 
-    <!-- prettier-ignore -->
+
+
     <script>
         (g => {
             var h, a, k, p = "The Google Maps JavaScript API",
