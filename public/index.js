@@ -146,7 +146,8 @@ async function getCurrentLocation() {
   } 
 }
 const locationButton = document.querySelector(`#myLocation`);
-locationButton.addEventListener("click", async() => {
+locationButton.addEventListener("click", async(e) => {
+  e.target.classList.add(`loading`);
   const pos = await getCurrentLocation();
   console.log(pos);
   geocoder.geocode({
@@ -158,6 +159,7 @@ locationButton.addEventListener("click", async() => {
         map.setCenter(pos);
         pickupLocation = pos;
         document.querySelector(`#pickupAddress`).value = results[0].formatted_address;
+        e.target.classList.remove(`loading`);
       }
     }
   });
@@ -225,6 +227,7 @@ function createDriverMarker(driver, data) {
 alertRideRequest();
 let rideNR = 1;
 live(`click`, `#requestPickup`, function (e) {
+  e.target.disabled = true;
   var myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
   var raw = JSON.stringify({

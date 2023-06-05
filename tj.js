@@ -98,6 +98,7 @@ function rideExists(id) {
 
 app.post("/rides", (req, res) => {
   const data = req.body;
+  if(!data.location) { res.status(400).end(); return; }
   rides.push(req.body);
   console.log(rides);
   res.status(200).end();
