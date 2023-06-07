@@ -12,46 +12,112 @@
 </head>
 
 <body>
+    <div class="scroll">
+        <div class="m">
+            <div class="p">
+                <div class="b" id="rider">
 
-    <div class="m">
-        <div class="p">
-            <div class="b" id="rider">
+                    <main>
+                        <header>
+                            <div id="logo">BaselCabs.ch</div>
+                            <div id="menu">=</div>
+                        </header>
+                        <figure id="map"></figure>
+                    </main>
+                    <footer>
+                        <div class="top"></div>
+                        <div id="rideRequest">
+                            <div class="loading">Request has been submitted. Finding a driver...</div>
+                            <div id="rideAccepted">
+                                <div>Grigorijs accepted the request.</div>
+                                <div>
+                                    <p>Car: VAZ 2102</p>
+                                    <p>Number: 6575 MFH</p>
+                                </div>
+                                <div id="journey">Time to arrive: <span id="tta">0</span>, Distance: <span
+                                        id="dist">0</span></div>
+                            </div>
+                        </div>
+                        <div class="input-wrap">
+                            <img src="mylocation.png" id="myLocation" />
+                            <input type="text" id="pickupAddress" placeholder="Pickup address" />
+                        </div>
+                        <button id="requestPickup">Request Pickup</button>
+
+
+                        <div id="online">Drivers Online: <span>0</span></div>
+                        <div id="drivers"></div>
                 
-                <main>
-                    <header>
-                        <div id="logo">BaselCabs.ch</div>
-                        <div id="menu">=</div>
-                    </header>
-                    <figure id="map"></figure>
-                </main>
-                <footer>
-                    <div class="top"></div>
-                    <div class="input-wrap">
-                        <img src="mylocation.png" id="myLocation" />
-                        <input type="text" id="pickupAddress" placeholder="Pickup address" />
-                    </div>
-                    
-                    <button id="requestPickup">Request Pickup</button>
-                    <div id="journey">Time to arrive: <span id="tta">0</span>, Distance: <span id="dist">0</span></div>
-                
-                    <div id="drivers"></div>
-                    <div id="online">Drivers Online: <span>0</span></div>
-                    <div id="requests">
-                        <h4>Pending rides:</h4>
-                        <div></div>
-                    </div>
-                </footer>
+                        
+                        
+
+                    </footer>
+                </div>
             </div>
-        </div>
-        <div class="p">
-            <div class="b">
-                <div id="rideRequests"></div>
-                <main>
-                    <h4>Hello, Grisha!</h4>
-                    
-                </main>
+            <div class="p">
+                <div class="b" id="driverApp">
+                    <div id="rideRequests"></div>
+                    <main>
+                        <div class="profile">
+                            <img class="profile_image" src="/driver0.png" />
+                            <h4>Gerorgijs Suptels</h4>
+                            <div class="online_toggle"><input type="checkbox" id="online_status" checked /><label
+                                    for="online_status">Online?</label></div>
+                        </div>
+                        <div class="rest">
+
+                            <h4>Drivers Online:</h4>
+                            <pre>
+[
+    {
+        "driver_id": "123",
+        "name": "grigorijs",
+        "last_name": "leps",
+        "last_location": {
+            "lng":0.124343,
+            "lat":-41.43243
+        },
+        "status": "online",
+        "car": "VAZ 2101",
+        "plate": "6575 MFH"
+    }
+]</pre>
+                            <h4>Ride requests:</h4>
+                            <pre>
+[
+    {
+        "id": 1,
+        "user_id": 456,
+        "location": {
+        "lat": 47.5291176,
+        "lng": 7.644908799999999
+        },
+        "accepted": false
+    }
+]</pre>
+                            <h4>Accepted rides:</h4>
+                            <pre>
+[
+    {
+        "id": 1,
+        "user_id": 456,
+        "drive_id": 789,
+        "location": {
+            "from" : {
+                "lat": 47.5291176,
+                "lng": 7.644908799999999
+            }, 
+            "to": {
+                "lat": 47.5291176,
+                "lng": 7.644908799999999
+            }
+        },
+        "status": "in_progress"
+    }
+]</pre>
+                    </main>
+                </div>
             </div>
-            
         </div>
     </div>
 

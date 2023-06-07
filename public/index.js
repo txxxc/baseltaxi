@@ -86,9 +86,10 @@ async function initMap() {
   });
   infoWindow = new google.maps.InfoWindow();
   getUserLocation();
+  fetchTJ();
 }
 initMap();
-fetchTJ();
+
 let livePos = null;
 
 async function getUserLocation() {
@@ -181,7 +182,7 @@ async function fetchTJ() {
       return;
     })
     .then(async function (res) {
-      await sleep(1000);
+      
       if (res) {
         if (Object.keys(res).length > 0) {
           driversOnline = Object.keys(res).length;
@@ -206,6 +207,7 @@ async function fetchTJ() {
           }
         }
       }
+      await sleep(5000);
       fetchTJ();
     });
 }
@@ -219,7 +221,6 @@ function createDriverMarker(driver, data) {
   return new google.maps.Marker({
     map: map,
     icon: image,
-    scaledSize: new google.maps.Size(10, 10),
     position: position,
     title: driver,
   });
@@ -309,7 +310,7 @@ function alertRideRequest() {
       return;
     })
     .then(async function (res) {
-      await sleep(500);
+      
       //console.log(res);
       createRideRequests(res);
       if (res.length > 0) {
@@ -317,6 +318,7 @@ function alertRideRequest() {
       } else {
         document.querySelector(`#rideRequests`).classList.add(`hidden`);
       }
+      await sleep(5000);
       alertRideRequest();
     });
 };
